@@ -8,7 +8,7 @@
             <div class="card">
                 <div class="card-body">
                     <h1 class="text-center text-success">
-                        Sei nell'index dei projects!
+                        Sei nell'index dei technologies!
                     </h1>
 
                     <table class="table">
@@ -24,20 +24,9 @@
                                 </th>
                      
                                 <th scope="col">
-                                    slug
+                                    projects
                                 </th>
                      
-                                <th scope="col">
-                                    Description
-                                </th>
-
-                                <th scope="col">
-                                    Type
-                                </th>
-                              
-                                <th scope="col">
-                                    Technologies
-                                </th>
                 
                         
                             </tr>
@@ -46,56 +35,43 @@
                 
                         <tbody>
             
-                            @foreach ($projects as $project)
+                            @foreach ($technologies as $technology)
                             <tr>
             
                                 <th scope="row">
-                                    {{$project->id}}
+                                    {{$technology->id}}
                                 </th>                    
                                 
                                 <td>
-                                    {{$project->title}}
+                                    {{$technology->technology_name}}
                                 </td>
 
-                                <td>
-                                    {{$project->slug}}
-                                </td>
-
-                                <td>
-                                    {{$project->description}}
-                                </td>
-                               
                                 <td>
                                     
-                                    @if ($project->type)
+                                    @forelse ($technology->projects as $project)
 
-                                    
-                                  
-                                        <a href="{{route('admin.types.show',['type'=>$project->type])}}">{{$project->type->type_name}}</a>
-                                    
+                                        <a href="{{route('admin.projects.show',['project'=>$project])}}"> {{ $project->title }} </a>
 
-                                    @else
-                                        -
-                                    @endif   
+                                        @if ((!$loop->last))
+                                        ,
 
-                                </td>
-                              
-                                <td>
-                                    @forelse ($project->technologies as $technology)
-
-                                    <a href="{{route('admin.technologies.show',['technology'=>$technology])}}">{{$technology->technology_name}}</a>
+                                        @endif
                                         
                                     @empty
-                                    -
 
-                                    @endforelse
-                             
+                                        -
+                                        
+                                    @endforelse 
 
                                 </td>
 
+                              
+
+            
+
                                 <td>
 
-                                    <a href="{{route('admin.projects.show',['project'=>$project])}}">
+                                    <a href="{{route('admin.technologies.show',['technology'=>$technology])}}">
                                   
                                         <button>
                                             Show
@@ -103,7 +79,7 @@
 
                                     </a>
 
-                                    <a href="{{route('admin.projects.edit',['project'=>$project])}}">
+                                    <a href="{{route('admin.technologies.edit',['technology'=>$technology])}}">
 
                                         <button>
                                             Edit
@@ -111,11 +87,11 @@
 
                                     </a>
 
-                                    <form onsubmit="return confirm('sei sicuro?')" action="{{route('admin.projects.destroy',['project'=>$project])}}" method="POST">
+                                    <form onsubmit="return confirm('sei sicuro?')" action="{{route('admin.technologies.destroy',['technology'=>$technology])}}" method="POST">
                                         @csrf
                                         @method('Delete')
 
-                                        <button type='submit'>
+                                        <button technology='submit'>
                                             Delete
                                         </button>
 
@@ -134,10 +110,10 @@
             
                     </table>
 
-                    <a href="{{route('admin.projects.create')}}">
+                    <a href="{{route('admin.technologies.create')}}">
                     
                         <button>
-                            + Nuovo Progetto
+                            + Nuovo Tipo
                         </button>
 
                     </a>

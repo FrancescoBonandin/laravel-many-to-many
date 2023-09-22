@@ -9,7 +9,7 @@
             <label for="name">
                 Name
             </label>
-            <input type="text" id="name" name="name">
+            <input type="text" id="name" name="name" value='{{old('name')}}'>
         </div>
 
         <!-- Email Address -->
@@ -17,7 +17,7 @@
             <label for="email">
                 Email
             </label>
-            <input type="email" id="email" name="email">
+            <input type="email" id="email" name="email" value='{{old('email')}}' >
         </div>
 
         <!-- Password -->
@@ -25,7 +25,7 @@
             <label for="password">
                 Password
             </label>
-            <input type="password" id="password" name="password">
+            <input type="password" id="password" name="password" >
         </div>
 
         <!-- Confirm Password -->

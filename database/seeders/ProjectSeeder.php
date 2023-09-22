@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Schema;
 
 use App\Models\Project;
 use App\Models\Type;
+use App\Models\Technology;
 
 class ProjectSeeder extends Seeder
 {
@@ -32,7 +33,6 @@ class ProjectSeeder extends Seeder
             }
 
             $title=fake()->words(rand(1,5),true);
-
 
             Project::create([
 
