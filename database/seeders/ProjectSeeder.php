@@ -32,7 +32,7 @@ class ProjectSeeder extends Seeder
                 $randomTypeId = Type::inRandomOrder()->first()->id;
             }
 
-            $title=fake()->words(rand(1,5),true);
+            $title=fake()->words(rand(1,3),true);
 
             Project::create([
 

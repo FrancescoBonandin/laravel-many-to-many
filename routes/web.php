@@ -9,6 +9,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\TypeController;
+use App\Http\Controllers\Admin\TechnologyController;
 
 
 /*
@@ -34,7 +35,7 @@ Route::middleware(['auth', 'verified'])
     Route::get('/dashboard', [DashboardController::class,'dashboard'])->name('dashboard');
     Route::resource('projects',ProjectController::class);
     Route::resource('types',TypeController::class);
-    Route::resource('technologies',TypeController::class);
+    Route::resource('technologies',TechnologyController::class);
     }
 
 );

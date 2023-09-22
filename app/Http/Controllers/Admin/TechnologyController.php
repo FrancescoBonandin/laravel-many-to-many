@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Technology;
 use App\Http\Requests\StoreTechnologyRequest;
 use App\Http\Requests\UpdateTechnologyRequest;
+use App\Http\Controllers\Controller;
 
 class TechnologyController extends Controller
 {
@@ -13,7 +14,10 @@ class TechnologyController extends Controller
      */
     public function index()
     {
-        //
+        $technologies=Technology::all();
+
+        return view('technologies.index', compact('technologies'));
+
     }
 
     /**
@@ -21,7 +25,7 @@ class TechnologyController extends Controller
      */
     public function create()
     {
-        //
+        return view('technologies.create');
     }
 
     /**
@@ -29,7 +33,13 @@ class TechnologyController extends Controller
      */
     public function store(StoreTechnologyRequest $request)
     {
-        //
+        $formData=$request->validated();
+
+        Technology::create([
+            'technology_name'=>$formData['technology_name']
+        
+        ]);
+        return redirect()->route('admin.technologies.index');
     }
 
     /**
@@ -37,7 +47,8 @@ class TechnologyController extends Controller
      */
     public function show(Technology $technology)
     {
-        //
+
+        return view('technologies.show', compact('technology'));
     }
 
     /**
@@ -45,7 +56,7 @@ class TechnologyController extends Controller
      */
     public function edit(Technology $technology)
     {
-        //
+        return view('technologies.edit',compact('technology'));
     }
 
     /**
@@ -53,7 +64,14 @@ class TechnologyController extends Controller
      */
     public function update(UpdateTechnologyRequest $request, Technology $technology)
     {
-        //
+                
+        $formData=$request->validated();
+
+        $technology->update([
+            'technology_name'=> $formData['technology_name'],
+        ]);
+
+        return redirect()->route('admin.technologies.index');
     }
 
     /**
@@ -61,6 +79,8 @@ class TechnologyController extends Controller
      */
     public function destroy(Technology $technology)
     {
-        //
+        $technology=technology::destroy($technology->id);
+        
+        return redirect()->route('admin.technologies.index');
     }
 }

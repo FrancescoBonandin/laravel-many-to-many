@@ -30,6 +30,19 @@
                         <a href="{{route('admin.types.show',['type'=>$project->type])}}">{{$project->type->type_name}}</a>
                     </div>
 
+                    <div>
+                        technologies:
+
+                        @forelse ($project->technologies as $technology)
+
+                        <a href="{{route('admin.technologies.show',['technology'=>$technology])}}">{{$technology->technology_name}}</a>
+                            
+                        @empty
+                            -
+                        @endforelse
+                        
+                    </div>
+
                 </div>
             </div>
         </div>

@@ -29,7 +29,7 @@ class TechnologySeeder extends Seeder
 
        foreach($technologies as $technologyName ){
 
-            technology::create([
+            Technology::create([
             'technology_name' =>$technologyName,
             
             ]);

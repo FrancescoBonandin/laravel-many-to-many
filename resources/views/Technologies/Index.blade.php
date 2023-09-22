@@ -113,7 +113,7 @@
                     <a href="{{route('admin.technologies.create')}}">
                     
                         <button>
-                            + Nuovo Tipo
+                            + Nuova tecnologia 
                         </button>
 
                     </a>

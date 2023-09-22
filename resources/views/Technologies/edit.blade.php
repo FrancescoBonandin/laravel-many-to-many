@@ -10,7 +10,7 @@
         <div class="col bg-dark text-white py-4">
 
             <h1>
-                sei nella sezione edit di {{$type->type_name}}!!!!
+                sei nella sezione edit di {{$technology->technology_name}}!!!!
             </h1>
 
             @if ($errors->any())
@@ -31,13 +31,13 @@
                 
             @endif
 
-            <form action="{{ route('admin.types.update', ['type'=>$type]) }}" method="POST">
+            <form action="{{ route('admin.technologies.update', ['technology'=>$technology]) }}" method="POST">
                 @csrf
                 @method('PUT')
 
                 <div class="mb-3">
-                    <label for="type_name" class="form-label">type_name</label>
-                    <input type="text" maxlength="1024" class="form-control @error('type_name') is-invalid @enderror"  id="type_name" name="type_name" value='{{old('type_name',$type->type_name)}}' placeholder="Enter value..." required>
+                    <label for="technology_name" class="form-label">technology_name</label>
+                    <input technology="text" maxlength="1024" class="form-control @error('technology_name') is-invalid @enderror"  id="technology_name" name="technology_name" value='{{old('technology_name',$technology->technology_name)}}' placeholder="Enter value..." required>
                 </div>
 
                 @error('title')
@@ -47,7 +47,7 @@
                 @enderror
 
                 <div>
-                    <button type="submit" class="btn btn-success w-100">
+                    <button technology="submit" class="btn btn-success w-100">
                         + Modifica
                     </button>
                 </div>
