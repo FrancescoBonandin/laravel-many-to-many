@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('page-title', 'Show '{{$type->type_name}})
+@section('page-title', "Show {{$type->type_name}} ")
 
 @section('main-content')
     <div class="row">

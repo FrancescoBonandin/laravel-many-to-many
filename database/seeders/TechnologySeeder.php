@@ -2,40 +2,37 @@
 
 namespace Database\Seeders;
 
-use App\Models\Type;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-
-// Facades
 use Illuminate\Support\Facades\Schema;
 
-class TypeSeeder extends Seeder
+use App\Models\Technology;
+
+class TechnologySeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-
         Schema::withoutForeignKeyConstraints(function () {
-            Type::truncate();
+            Technology::truncate();
         });
 
-       $types=[
+       $technologies=[
 
-        'HTML',
-        'CSS',
-        'JS',
-        'PHP',
+        'Vue',
+        'Sass',
+        'Laravel',
        ];
 
-       foreach($types as $typeName ){
+       foreach($technologies as $technologyName ){
 
-        Type::create([
-            'type_name' =>$typeName,
+            technology::create([
+            'technology_name' =>$technologyName,
             
-        ]);
-       };
+            ]);
+        };
     }
 }
