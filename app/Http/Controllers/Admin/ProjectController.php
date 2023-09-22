@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 // Models
 use App\Models\Project;
 use App\Models\Type;
+use App\Models\Technology;
 
 class ProjectController extends Controller
 {
@@ -29,8 +30,9 @@ class ProjectController extends Controller
     {
         $types=Type::all();
 
+        $technologies=Technology::all();
 
-        return view('projects.create',compact('types'));
+        return view('projects.create',compact('types', 'technologies'));
     }
 
     /**
@@ -42,19 +44,20 @@ class ProjectController extends Controller
         $formData=$request->validated();
         $slug=str()->slug($formData['title']);
 
-        Project::create([
+        $project=Project::create([
             'title'=> $formData['title'],
             'slug'=> $slug,
             'description'=> $formData['description'],
             'type_id'=>$formData['type_id']
         ]);
 
-        // $project=new Project();
-        // $project->title=$request->input('title');
-        // $project->slug=str()->slug($request->input('title'));
-        // $project->description=$request->input('description');
-        // $project->save();
-
+        if (isset($formData['technologies'])) {
+            foreach ($formData['technologies'] as $technologyId) {
+                                                
+                                                
+                $project->technologies()->attach($technologyId);  
+            }
+        }
 
         return redirect()->route('admin.projects.index');
     }
@@ -76,7 +79,9 @@ class ProjectController extends Controller
     {
         $types=Type::all();
 
-        return view('projects.edit', compact('project','types'));
+        $technologies=Technology::all();
+
+        return view('projects.edit',compact('project', 'types', 'technologies'));
     }
 
     /**
@@ -100,14 +105,12 @@ class ProjectController extends Controller
             ]
         );
 
-        // $formData=$request->validated();
-        // $slug=str()->slug($request->input('title'));
-
-        // $project= Project::findOrFail($project->id);
-        // $project->title=$formData['title'];
-        // $project->slug=$slug;
-        // $project->description=$formData['description'];
-        // $project->save();
+        if (isset($formData['technologies'])) {
+            $project->technologies()->sync($formData['technologies']);
+        }
+        else {
+            $project->technologies()->detach();
+        }
 
 
         return redirect()->route('admin.projects.index',);
