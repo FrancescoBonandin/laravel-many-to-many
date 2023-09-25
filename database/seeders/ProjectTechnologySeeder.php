@@ -20,7 +20,7 @@ class ProjectTechnologySeeder extends Seeder
         // Loop through projects and attach technologies to them
         foreach ($projects as $project) {
             // Attach technologies to projects (you can use attach, sync, or other methods)
-            $project->technologies()->sync($technologies->random(rand(0, 3))->pluck('id')->toArray());
+            $project->technologies()->sync($technologies->random(rand(0,count($technologies)))->pluck('id')->toArray());
         }
     }
 }

@@ -83,7 +83,9 @@
                                 <td>
                                     @forelse ($project->technologies as $technology)
 
-                                    <a href="{{route('admin.technologies.show',['technology'=>$technology])}}">{{$technology->technology_name}}</a>
+                                    <a href="{{route('admin.technologies.show',['technology'=>$technology])}}">
+                                        
+                                        {{$technology->technology_name}},</a>
                                         
                                     @empty
                                     -
