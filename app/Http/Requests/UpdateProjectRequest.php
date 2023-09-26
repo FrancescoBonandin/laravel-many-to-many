@@ -28,7 +28,9 @@ class UpdateProjectRequest extends FormRequest
             'description'=>'min:0',
             'type_id'=>'nullable|exists:types,id',
             'technologies' => 'nullable|array',
-            'technologies.*'=>'exists:technologies,id'
+            'technologies.*'=>'exists:technologies,id',
+            'img'=>'nullable|image'
+
 
         ];
     }

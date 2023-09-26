@@ -31,7 +31,7 @@
                 
             @endif
 
-            <form action="{{ route('admin.projects.update', ['project'=>$project]) }}" method="POST">
+            <form action="{{ route('admin.projects.update', ['project'=>$project]) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -55,7 +55,26 @@
                     <div class="alert alert-danger my-2">
                         {{ $message }}
                     </div>
-                @enderror   
+                @enderror 
+                
+                <div class="mb-3">
+                    <label for="img" class="form-label">img</label>
+                    <input type="file" accept="image/*" maxlength="1024" class="form-control @error('img') is-invalid @enderror"  id="img" name="img" value='{{old('img',$project->img)}}' placeholder="Enter value..." required>
+                </div>
+
+                @if ($project->img)
+
+                <div>
+                    <img src="/storage/{{$project->img}}" alt="{{$project->title}}">
+                </div>
+                    
+                @endif
+
+                @error('img')
+                    <div class="alert alert-danger my-2">
+                        {{ $message }}
+                    </div>
+                @enderror
 
                 <div class="mb-3">
 

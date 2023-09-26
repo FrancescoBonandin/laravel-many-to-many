@@ -32,6 +32,10 @@
                                 </th>
 
                                 <th scope="col">
+                                    Img
+                                </th>
+
+                                <th scope="col">
                                     Type
                                 </th>
                               
@@ -63,6 +67,14 @@
 
                                 <td>
                                     {{$project->description}}
+                                </td>
+
+                                <td>
+                                    @if ($project->img)
+                                        Si
+                                    @else
+                                        No
+                                    @endif
                                 </td>
                                
                                 <td>

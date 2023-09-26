@@ -24,6 +24,17 @@
                     <div>
                         Description:{{$project->description}}
                     </div>
+                    
+                    <div>
+                        img:
+                        @if ($project->img)
+                        
+                        <img src="/storage/{{$project->img}}" alt="{{$project->title}}">
+                        @else
+                            -
+                        @endif
+                        
+                    </div>
 
                     <div>
                         type:

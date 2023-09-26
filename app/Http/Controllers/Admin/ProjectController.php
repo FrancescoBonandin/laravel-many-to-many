@@ -6,6 +6,8 @@ use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Controllers\Controller;
 
+use Illuminate\Support\Facades\Storage;
+
 // Models
 use App\Models\Project;
 use App\Models\Type;
@@ -44,11 +46,17 @@ class ProjectController extends Controller
         $formData=$request->validated();
         $slug=str()->slug($formData['title']);
 
+        $ImagePath = null;
+        if (isset($formData['img'])) {
+            $ImagePath = Storage::put('uploads/images', $formData['img']);
+        }
+
         $project=Project::create([
             'title'=> $formData['title'],
             'slug'=> $slug,
             'description'=> $formData['description'],
-            'type_id'=>$formData['type_id']
+            'type_id'=>$formData['type_id'],
+            'img'=>$ImagePath
         ]);
 
         if (isset($formData['technologies'])) {
@@ -93,6 +101,21 @@ class ProjectController extends Controller
         $formData=$request->validated();
         $slug=str()->slug($formData['title']);
 
+        $ImagePath = $project->img;
+        if (isset($formData['img'])) {
+            if ($project->img) {
+                Storage::delete($project->img);
+            }
+
+            $ImagePath = Storage::put('uploads/images', $formData['img']);
+        }
+        else if (isset($formData['remove_img'])) {
+            if ($project->img) {
+                Storage::delete($project->img);
+            }
+
+            $ImagePath = null;
+        }
         
 
         $project->update(
@@ -101,6 +124,7 @@ class ProjectController extends Controller
                 'slug'=>$slug,
                 'description'=>$formData['description'],
                 'type_id'=>$formData['type_id'],
+                'img'=>$ImagePath
 
             ]
         );
