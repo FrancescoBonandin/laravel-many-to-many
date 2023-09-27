@@ -109,9 +109,9 @@ class ProjectController extends Controller
 
             $ImagePath = Storage::put('uploads/images', $formData['img']);
         }
-        else if (isset($formData['remove_img'])) {
+        else if (isset($request['checkbox'])) {
             if ($project->img) {
-                Storage::delete($project->img);
+                Storage::delete('uploads/images',$project->img);
             }
 
             $ImagePath = null;

@@ -59,7 +59,7 @@
                 
                 <div class="mb-3">
                     <label for="img" class="form-label">img</label>
-                    <input type="file" accept="image/*" maxlength="1024" class="form-control @error('img') is-invalid @enderror"  id="img" name="img" value='{{old('img',$project->img)}}' placeholder="Enter value..." required>
+                    <input type="file" accept="image/*" maxlength="1024" class="form-control @error('img') is-invalid @enderror"  id="img" name="img" value='{{old('img',$project->img)}}' placeholder="Enter value..." >
                 </div>
 
                 @if ($project->img)
@@ -67,7 +67,10 @@
                 <div>
                     <img src="/storage/{{$project->img}}" alt="{{$project->title}}">
                 </div>
-                    
+
+                <label for="checkbox">rimuovi img </label>
+
+                <input type="checkbox" name="checkbox" id="checkbox" value="1">                    
                 @endif
 
                 @error('img')
